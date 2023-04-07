@@ -104,11 +104,11 @@ yarn start:test
 
 ### Progress
 
-- [ ] Develop resolver to verify user with `account_number`, `bank_name` and `name`.
-- [ ] Develop resolver to verify user with `bank_code` and `account_number`.
-- [ ] Write tests.
-- [ ] Write a short note on why we use pure Levenshtein Distance algorithm as opposed to Damerau-Levenshtein Distance algorithm in this scenario.
-- [ ] Turn in assumptions.
+- [x] Develop resolver to verify user with `account_number`, `bank_name` and `name`.
+- [x] Develop resolver to verify user with `bank_code` and `account_number`.
+- [x] Write tests.
+- [x] Write a short note on why we use pure Levenshtein Distance algorithm as opposed to Damerau-Levenshtein Distance algorithm in this scenario.
+- [x] Turn in assumptions.
 
 ### Why use a levenshtein distance algorithm over the damerau-levenshtein distance algorithm in this scenario
 
