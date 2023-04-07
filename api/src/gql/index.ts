@@ -30,7 +30,7 @@ const AccountType = new GraphQLObjectType({
 const Query = new GraphQLObjectType({
   name: 'query',
   fields: {
-    user: {
+    accounts: {
       type: new GraphQLList(AccountType),
       resolve: function () {
         return AccountQueries.retrieveUsers();
@@ -51,8 +51,8 @@ const Mutation = new GraphQLObjectType({
         bank_name: { type: GraphQLString },
         account_number: { type: GraphQLString },
       },
-      resolve(parent, args) {
-        return AccountMutations.createAccount(parent, args);
+      resolve(_, args) {
+        return AccountMutations.createAccount(args);
       },
     },
 
@@ -62,8 +62,8 @@ const Mutation = new GraphQLObjectType({
         account_number: { type: GraphQLString },
         bank_code: { type: GraphQLString },
       },
-      resolve(parent, args) {
-        return AccountMutations.retrieveAccount(parent, args);
+      resolve(_, args) {
+        return AccountMutations.retrieveAccount(args);
       },
     },
   },

@@ -1,14 +1,8 @@
 import { StringHelpers } from '../helpers';
-import banks from './nigerian_banks.json';
-import { User, Bank } from '../types';
+import { User } from '../types';
 
 class DatabaseService {
   private readonly users: User[] = [];
-  private readonly banks: Bank[] = [];
-
-  constructor() {
-    this.banks = [...banks];
-  }
 
   createUser = (user: Omit<User, 'id' | 'is_verified'>): User => {
     const saved_user = {
@@ -58,21 +52,6 @@ class DatabaseService {
 
   retrieveUsersCount = () => {
     return this.users.length;
-  };
-
-  retrieveBankCode = (bank_name: string): string | null => {
-    const bank = this.banks.find((b) => b.name === bank_name)!;
-
-    if (!bank) {
-      return null;
-    }
-
-    return bank.code;
-  };
-
-  retrieveBankName = (bank_code: string): string => {
-    const bank = this.banks.find((b) => b.code === bank_code)!;
-    return bank.name;
   };
 }
 

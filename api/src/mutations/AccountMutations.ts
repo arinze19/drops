@@ -1,13 +1,10 @@
-import db from '../db';
+import db from '../db/DatabaseService';
 import { PaystackHelpers, StringHelpers } from '../helpers';
 import { User } from '../types';
 
 export default class AccountMutations {
-  static async createAccount(
-    parent: unknown,
-    args: Omit<User, 'id' | 'is_verified'>
-  ) {
-    const bank_code = db.retrieveBankCode(args.bank_name!);
+  static async createAccount(args: Omit<User, 'id' | 'is_verified'>) {
+    const bank_code = PaystackHelpers.retrieveBankCode(args.bank_name!);
 
     if (!bank_code) {
       throw new Error('We do not support this bank, please try another');
@@ -36,9 +33,14 @@ export default class AccountMutations {
   }
 
   static async retrieveAccount(
-    parent: unknown,
     args: Pick<User, 'account_number'> & { bank_code: string }
   ) {
+    const bank_name = PaystackHelpers.retrieveBankName(args.bank_code);
+
+    if (!bank_name) {
+      throw new Error('We do not support this bank, please try another');
+    }
+
     const { data } = await PaystackHelpers.verifyAccountName(
       args.account_number!,
       args.bank_code
@@ -50,13 +52,13 @@ export default class AccountMutations {
       user = db.createUser({
         name: data.account_name,
         account_number: args.account_number,
-        bank_name: db.retrieveBankName(args.bank_code),
+        bank_name: bank_name,
       });
     }
 
     return db.modifyUser(user.name, {
       account_number: args.account_number,
-      bank_name: db.retrieveBankName(args.bank_code),
+      bank_name: bank_name,
       is_verified: true,
     })!;
   }
