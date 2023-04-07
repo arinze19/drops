@@ -13,7 +13,9 @@ cp ./api/.example.env ./api/.env
 ```
 
 3. Grab a free API secret key from [paystack developer portal](https://paystack.com/developers) and populate your `.env` files appropriately.
-  - **NB:** Ideally, the `DEFAULT_USER` in `.env` should be the name on your registered bank account
+
+- **NB:** Ideally, the `DEFAULT_USER` in `.env` should be the name on your registered bank account
+
 4. Change directory into `./api` and run the command `yarn start:dev`
 5. An interactive graphiql playground should be live and available on the local network `https://localhost:5151/graphql`
 
@@ -112,5 +114,6 @@ yarn start:test
 
 ### Why use a levenshtein distance algorithm over the damerau-levenshtein distance algorithm in this scenario
 
-The fundamental difference between the [levenshtein distance algorithm](https://en.wikipedia.org/wiki/Levenshtein_distance) and the [damerau-levenshtein distance algorithm](https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance) is the addition of transpose operation on characters in the latter, this brings us to a very interesting scenario. 
-Since in this problem we assume the error in user input to be caused by hastiness, it is efficient to use the levenshten distance algorithm since errors in this category are limited to missing or a mistyped characters (As stated in the [assumptions](https://github.com/arinze19/drops#assumptions), we are assuming the user knows and inputs their name in the correct order which they have in their registered bank). With a relatively lower runtime than the damerau-levenshtein distance algorithm, it seems like the most efficient algorithm to implement for this problem. However, if we were to implement stricter checks and fraud detection on our program, we could employ the damerau-levenshtein algorithm and for example trigger alarms the account of a registered user `CIROMA ADEKUNLE YUSUF` were to accessed as `ADEKUNLE CIROMA YUSUF`. 
+The fundamental difference between the [levenshtein distance algorithm](https://en.wikipedia.org/wiki/Levenshtein_distance) and the [damerau-levenshtein distance algorithm](https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance) is the addition of transpose operation on characters in the latter, this brings us to a very interesting scenario.<br />
+Since in this problem we assume the error in user input to be caused by hastiness, it is efficient to use the levenshten distance algorithm as errors in this category are limited to missing or a mistyped characters (as stated in the [assumptions](https://github.com/arinze19/drops#assumptions), we are assuming the user knows and inputs their name in the correct order which they have in their registered bank). <br />
+With a relatively lower runtime than the damerau-levenshtein distance algorithm, it seems like the most efficient algorithm to implement for this problem. However, if we were to implement stricter checks and fraud detection on our program, we could employ the damerau-levenshtein algorithm and perhaps trigger alarms if the account of a registered user -- `CIROMA ADEKUNLE YUSUF` were to accessed as `ADEKUNLE CIROMA YUSUF`.
