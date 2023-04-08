@@ -6,18 +6,28 @@ You can also skip the long chat and go into the [justification of using the leve
 ### Getting Started
 
 1. Make sure you have [nodejs](https://nodejs.org/en) installed on your local machine
-2. Setup your environment variables
+2. clone the repository
+
+```
+git clone https://github.com/arinze19/drops
+```
+
+3. dig into the project directory
+
+```
+cd drops
+```
+
+4. Setup your environment variables
 
 ```bash
 cp ./api/.example.env ./api/.env
 ```
 
-3. Grab a free API secret key from [paystack developer portal](https://paystack.com/developers) and populate your `.env` files appropriately.
+5. Grab a free API secret key from [paystack developer portal](https://paystack.com/developers) and populate your `.env` files appropriately. **NB:** Ideally, the `DEFAULT_USER` in `.env` should be the name on your registered bank account
 
-- **NB:** Ideally, the `DEFAULT_USER` in `.env` should be the name on your registered bank account
-
-4. Change directory into `./api` and run the command `yarn start:dev`
-5. An interactive graphiql playground should be live and available on the local network `https://localhost:5151/graphql`
+6. Change directory into `./api` and run the command `yarn install && yarn start:dev`
+7. An interactive graphiql playground should be live and available on the local network `https://localhost:5151/graphql`
 
 ### Technologies Used
 
