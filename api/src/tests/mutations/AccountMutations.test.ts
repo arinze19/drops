@@ -8,7 +8,7 @@ jest.mock('../../db/DatabaseService.ts', () => {
     createUser: jest.fn().mockReturnValue({
       id: Math.floor(1500 * Math.random()),
       ...stubs.user(),
-      is_verified: true,
+      is_verified: false,
     }),
     retrieveUser: jest.fn().mockReturnValue({}),
     retrieveUsers: jest.fn().mockReturnValue({}),

@@ -24,7 +24,8 @@ cd drops
 cp ./api/.example.env ./api/.env
 ```
 
-5. Grab a free API secret key from [paystack developer portal](https://paystack.com/developers) and populate your `.env` files appropriately. **NB:** Ideally, the `DEFAULT_USER` in `.env` should be the name on your registered bank account
+5. Grab a free API secret key from [paystack developer portal](https://paystack.com/developers) and populate your `.env` files appropriately. <br />
+**NB:** Ideally, the `DEFAULT_USER` in `.env` should be the name on your registered bank account
 
 6. Change directory into `./api` and run the command `yarn install && yarn start:dev`
 7. An interactive graphiql playground should be live and available on the local network `https://localhost:5151/graphql`
@@ -36,7 +37,7 @@ cp ./api/.example.env ./api/.env
 3. [JS-Levenshtein](https://www.npmjs.com/package/js-levenshtein) - Ready made efficient [levenshtein distance algorithm](https://en.wikipedia.org/wiki/Levenshtein_distance) written in javascript
 4. [jest](https://www.npmjs.com/package/jest) - Used to run tests
 
-**NB:** Due to the scope and size of this project, I opted to have it's database be more agnostic and implemented a volatile storage service instead of going with a traditional `NoSQL` or `SQL` database - I think this provides more flexibility for writing tests and also helps reviewers/contributors skip writing in their database credentials and get up and running as quickly as possible.
+**NB:** Due to the scope and size of this project, I opted to have it's database be more agnostic and implemented a volatile storage service instead of going with a traditional `NoSQL` or `SQL` database - I think this provides more flexibility for writing tests and helps reviewers/contributors get up and running rather quickly as opposed to writing in their database credentials
 
 ### Assumptions
 
@@ -56,6 +57,8 @@ src 📂
    mutations 📂 # mutation resolvers
    queries 📂 # query resolvers
    test 📂 # unit tests for resolvers
+      jest 📂 # jest related setup files 
+      mutations 📂 # tests for mutations
    types 📂 # type definitions
    server.ts 📄 # main entry point
 ```
@@ -125,5 +128,5 @@ yarn start:test
 ### Why use a levenshtein distance algorithm over the damerau-levenshtein distance algorithm in this scenario
 
 The fundamental difference between the [levenshtein distance algorithm](https://en.wikipedia.org/wiki/Levenshtein_distance) and the [damerau-levenshtein distance algorithm](https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance) is the addition of transpose operation on characters in the latter, this brings us to a very interesting scenario.<br />
-Since in this problem we assume the error in user input to be caused by hastiness, it is efficient to use the levenshten distance algorithm as errors in this category are limited to missing or a mistyped characters (as stated in the [assumptions](https://github.com/arinze19/drops#assumptions), we are assuming the user knows and inputs their name in the correct order which they have in their registered bank). <br />
-With a relatively lower runtime than the damerau-levenshtein distance algorithm, it seems like the most efficient algorithm to implement for this problem. However, if we were to implement stricter checks and fraud detection on our program, we could employ the damerau-levenshtein algorithm and perhaps trigger alarms if the account of a registered user -- `CIROMA ADEKUNLE YUSUF` were to accessed as `ADEKUNLE CIROMA YUSUF`.
+Since in this problem we assume the error in user input to be caused by hastiness, errors in this category then become limited to missing or mistyped characters (as stated in the [assumptions](https://github.com/arinze19/drops#assumptions), we are assuming the user knows and inputs their name in the correct order which they have in their registered bank). <br />
+With a relatively lower runtime than the damerau-levenshtein distance algorithm, it seems like the most efficient algorithm to implement for this problem. However, if we were to implement a more robust solution that could handle verifying `ADEKUNLE CIROMA YUSUF` and `YUSUF CIROMA ADEKUNLE` as the same, then using the  damerau-levenshtein algorithm would no doubt be a brilliant addition.
