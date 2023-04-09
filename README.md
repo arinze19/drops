@@ -42,7 +42,7 @@ cp ./api/.example.env ./api/.env
 ### Assumptions
 
 1. We are making an assumption here to stick to the name ordering we get from paysatck, Meaning `ADEKUNLE CIROMA YUSUF` and `CIROMA ADEKUNLE YUSUF` are **NOT** the same.
-2. We are also assuming that the `DEFAULT_USER` should match the `account_name` in order to use the first mutation, this is because we seed the database with this exact user. Perhaps there could be better ways to go about this but the [instructions](https://backdrop-photo.notion.site/Backdrop-Engineering-Challenge-98d101dec5a04f9ca79b1513901c80b8) did not provide much clarity on creating new accounts through this mutation.
+2. We are also assuming that the `DEFAULT_USER` should match the `account_name` in order to use the first mutation, this is because we seed the database with this exact user and don't perform levenshtein distance on the `DEFAULT_USER` and `account_name` since we are trusting our own database data. Perhaps there could be better ways to go about this but the [instructions](https://backdrop-photo.notion.site/Backdrop-Engineering-Challenge-98d101dec5a04f9ca79b1513901c80b8) did not provide much clarity on creating new accounts through this mutation.
 
 ### Folder Structure
 
