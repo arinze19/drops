@@ -85,6 +85,19 @@ describe('Account Mutations', () => {
         expect(verified_user).toHaveProperty('is_verified', true);
       });
     });
+
+    describe('when mutation_account name has alternate casing from paystacks account_name', () => {
+      it('verifies user in spite casing difference in mutation account_name and DEFAULT_USER', async () => {
+        const user = {
+          ...stubs.user(),
+          name: 'john doe',
+        };
+
+        const verified_user = await AccountMutations.createAccount(user);
+        expect(verified_user).toHaveProperty('is_verified', true);
+        expect(verified_user).toHaveProperty('name', 'JOHN DOE');
+      });
+    });
   });
 
   describe('Mutation Two', () => {

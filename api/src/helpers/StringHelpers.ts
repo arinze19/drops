@@ -6,6 +6,15 @@ export default class StringHelpers {
     paystack_account_name: string,
     tolerance = 2
   ) {
-    return levenshtein(user_account_name, paystack_account_name) <= tolerance;
+    return (
+      levenshtein(
+        this.lower_case(user_account_name),
+        this.lower_case(paystack_account_name)
+      ) <= tolerance
+    );
+  }
+
+  static lower_case(string_one: string) {
+    return string_one.toLocaleLowerCase();
   }
 }

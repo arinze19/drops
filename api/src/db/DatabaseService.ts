@@ -42,10 +42,17 @@ class DatabaseService {
   };
 
   modifyUser = (name: string, updated_user: Partial<User>): User | null => {
-    const index = this.users.findIndex((u) => u.name === name);
+    const index = this.users.findIndex(
+      (u) => StringHelpers.lower_case(u.name) === StringHelpers.lower_case(name)
+    );
     if (index < 0) return null;
 
-    this.users.splice(index, 1, { ...this.users[index], ...updated_user });
+    const original_name = this.users[index].name;
+    this.users.splice(index, 1, {
+      ...this.users[index],
+      ...updated_user,
+      name: original_name,
+    });
 
     return this.users[index];
   };
