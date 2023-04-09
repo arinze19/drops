@@ -36,6 +36,8 @@ cp ./api/.example.env ./api/.env
 2. [Axios](https://axios-http.com/) - For performing HTTP requests to the paystack API
 3. [JS-Levenshtein](https://www.npmjs.com/package/js-levenshtein) - Ready made efficient [levenshtein distance algorithm](https://en.wikipedia.org/wiki/Levenshtein_distance) written in javascript
 4. [jest](https://www.npmjs.com/package/jest) - Used to run tests
+5. [GraphQL](https://www.npmjs.com/package/graphql) - Query Language
+6. [Express-GraphQL](https://www.npmjs.com/package/express-graphql-server) - GraphQL-Server
 
 **NB:** Due to the scope and size of this project, I opted to have it's database be more agnostic and implemented a volatile storage service instead of going with a traditional `NoSQL` or `SQL` database - I think this provides more flexibility for writing tests and helps reviewers/contributors get up and running rather quickly as opposed to writing in their database credentials
 
@@ -85,7 +87,7 @@ mutation {
 # mutation two
 
 mutation {
-  create(account_number: "Account Number", bank_code: "Banks Code") {
+  retrieve(account_number: "Account Number", bank_code: "Banks Code") {
     id,
     name,
     bank_name,
